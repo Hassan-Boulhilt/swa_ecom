@@ -29,7 +29,8 @@ export default createStore({
         },
         setIsLoading(state, status) {
             state.isLoading = status
-        }
+        },
+
     },
     actions: {},
     modules: {}
