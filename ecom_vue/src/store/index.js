@@ -12,10 +12,10 @@ export default createStore({
     getters: {},
     mutations: {
         initializeStore(state) {
-            if (localStorage.getItem('cart')) {
-                state.cart = JSON.parse(localStorage.getItem('cart'))
+            if (localStorage.getItem("cart")) {
+                state.cart = JSON.parse(localStorage.getItem("cart"))
             } else {
-                localStorage.setItem('cart', JSON.stringify(state.cart))
+                localStorage.setItem("cart", JSON.stringify(state.cart))
             }
         },
         addToCart(state, item) {
@@ -25,7 +25,7 @@ export default createStore({
             } else {
                 state.cart.items.push(item)
             }
-            localStorage.setItem('cart', JSON.stringify(state.cart))
+            localStorage.setItem("cart", JSON.stringify(state.cart))
         },
         setIsLoading(state, status) {
             state.isLoading = status
