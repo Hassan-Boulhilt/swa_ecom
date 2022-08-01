@@ -3,67 +3,62 @@
     <section class="hero is-medium is-dark mb-6">
         <div class="hero-body has-text-centered">
             <p class="title mb-6">
-                Welcome to E-com
+                Welcome to Djacket
             </p>
             <p class="subtitle">
                 The best jacket store online
             </p>
         </div>
     </section>
-      <div class="columns is-multiline">
-           <div class="column is-12">
-                <h2 class="is-size-2 has-text-centered">Latest products</h2>
-           </div>
-  
-          <ProductBoxVue
-                v-for="product in latestProducts"
-                v-bind:key="product.id"
-                v-bind:product="product"
-          />
-    </div>
 
+    <div class="columns is-multiline">
+      <div class="column is-12">
+          <h2 class="is-size-2 has-text-centered">Latest products</h2>
+      </div>
+
+      <ProductBox 
+        v-for="product in latestProducts"
+        v-bind:key="product.id"
+        v-bind:product="product" />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ProductBoxVue from '@/components/ProductBox.vue'
 
-
+import ProductBox from '@/components/ProductBox'
 
 export default {
-  
   name: 'Home',
-  data(){
+  data() {
     return {
-      latestProducts:[]
+      latestProducts: []
     }
   },
   components: {
-    ProductBoxVue
-    
+    ProductBox
   },
-  mounted(){
+  mounted() {
     this.getLatestProducts()
-    document.title = 'Home | Jackets'
 
+    document.title = 'Home | Djackets'
   },
   methods: {
-    async getLatestProducts(){
+    async getLatestProducts() {
       this.$store.commit('setIsLoading', true)
+
       await axios
-      .get('/api/v1/latest_products/')
-      .then(response=>{
-        this.latestProducts = response.data
+        .get('/api/v1/latest-products/')
+        .then(response => {
+          this.latestProducts = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
 
-      })
-      .catch(error=>{
-        console.log(error)
-
-      })
       this.$store.commit('setIsLoading', false)
     }
-
   }
 }
 </script>
